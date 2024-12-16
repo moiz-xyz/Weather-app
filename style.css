@@ -1,0 +1,6 @@
+body{
+    background-color: black;
+}
+body.lightmode{
+background-color: white;
+}
