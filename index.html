@@ -4,13 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather app</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/8dd8a19338.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="lightmode">
-
+    <div class="nav">
+        <i id="light-icon" onclick="lightenable()" class="fa-regular fa-lightbulb"></i>
+        <i id="dark-icon" onclick="darkenable()" class="fa-solid fa-moon"></i>
     </div>
-    <div class="darkmode">
-    
+    <div>
+        <div class="nav_app">
+            <div class="icon">
+                <i class="fa-solid fa-cloud"></i>
+                <h3>Weatherio</h3>
+            </div>
+            <div class="input">
+                 <input id="city" type="search" placeholder="Search City....."> 
+                    <button  class="btn" onclick="getWeather ()" >Serach</button>
+                </div>
+            </div>
+            <div class="data-details">
+
+                <div id="weather-details">
+                    <!--  This is main temp div which shows 
+                     temp 
+                     discription 
+                     data   
+                     location 
+                     -->
+                     <h3> Now  </h3> 
+                     <h1>  24 °C </h1> 
+                     <p>Haze in fa-cloud+ </p> 
+                     <p>  17-august 2024 </p> 
+                     <p> <i class="fa-solid fa-location-dot"></i> karachi+ </p> 
+
+                </div>
+                
+            </div>
     </div>
     <script src="main.js"></script>
 </body>

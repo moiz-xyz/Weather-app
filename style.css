@@ -1,6 +1,115 @@
-body{
-    background-color: black;
+body {
+    background-color: white;
+    color: black;
+    font-family: "Montserrat", sans-serif;
 }
-body.lightmode{
-background-color: white;
+
+.nav> i {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    margin-left: 90%;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode #light-icon {
+    display: inline;
+}
+
+body.dark-mode #dark-icon {
+    display: none;
+}
+
+body.light-mode #dark-icon {
+    display: inline;
+}
+
+body.light-mode #light-icon {
+    display: none;
+}
+.nav_app{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    
+}
+.icon{
+    display: flex;
+    width: 25%;
+}
+.icon>i{
+    font-size: xx-large;
+    margin-top: 20px;
+    margin-left: 10px;
+    
+}
+.icon>h3{
+    font-size: x-large;
+    margin-left: 20px;
+}
+.input{
+    width: 100%;
+}
+.input>input{
+    width: 70%;
+    padding-top: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: 1px solid white;
+    font-size: large;
+    background-color: #444444; /* Dark Gray Background */
+    color: white;
+}
+
+.btn {
+    background-color: #444444; /* Dark Gray Background */
+
+    color: white; /* White Text */
+    font-size: larger;
+    margin-left: 10px;
+    padding-top: 15px;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-bottom: 15px;
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    width: auto; /* Adjust width to content */
+    cursor: pointer; /* Pointer on hover */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Hover effect */
+.btn:hover {
+    background-color: #555555; /* Lighter Gray on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deepened shadow for hover */
+    transform: scale(1.05); /* Slight scaling on hover */
+}
+
+/* Active effect (when clicked) */
+.btn:active {
+    background-color: #666666; /* Even lighter gray when clicked */
+    transform: scale(0.98); /* Slightly reduce size when clicked */
+}
+
+.data-details{
+    width: 100%;
+}
+#weather-details{
+    background-color: rgba(128, 128, 128, 0.226);
+    margin-top: 20px;
+    width: 15%;
+    margin-left: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    border-radius: 30px;
 }
