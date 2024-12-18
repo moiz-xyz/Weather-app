@@ -102,6 +102,8 @@ body.light-mode #light-icon {
 
 .data-details{
     width: 100%;
+    display: flex;
+    height: inherit;
 }
 #weather-details{
     background-color: rgba(128, 128, 128, 0.226);
@@ -118,3 +120,32 @@ body.light-mode #light-icon {
 #lastpara{
     padding-bottom: 10%;
 }
+#todays-higl{
+    background-color: rgba(128, 128, 128, 0.226);
+margin-left: 3%;
+width: 80%;
+}
+.flex{
+    display: flex;
+    width: 100%;
+    border: 2px solid green;
+}
+.flex2{
+    display: flex;
+
+}
+#air{
+    /* border: 20px solid red; */
+    background-color: rgba(0, 0, 0, 0.141);
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    text-align: center;
+
+}
+#air>h4{
+}
+/* #air>p{
+    display: flex;
+    flex-direction: column;
+} */
