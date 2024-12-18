@@ -10,87 +10,120 @@ function darkenable() {
     document.body.classList.add('dark-mode');
 }
 
-function getdata () {
-    
-    function getWeather (){ 
+   function getdata() {
+
+    function getWeather() {
         let city = document.getElementById("city").value
-        const api_key = `928754d34862d5c9491233f6ec79e1ff` ;
-         let open_api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=metric`;
-    fetch (open_api)
-    .then(function (response){
-        if ( response.ok){
-        return response.json()
-        } else{
-            throw new Error("City not found");
-    
-        }
-     })
-       .then(function(data) {
-        let weatherInfo = document.getElementById("weather-details");
-        let timestamp = data.dt;
-        let date = new Date(timestamp * 1000);
-        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let months = [
-          "January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
-        ];
-    
-        let formattedDate = `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
-    
-           if (data.main.temp <=20){
-        weatherInfo.innerHTML = '<h3> Now ' +'</h3>' +
-        '<h1>' + data.main.temp + '°C <i class="fa-solid fa-snowflake"></i> </h1>' +
-        '<p>Weather in ' + data.weather[0].description + '</p>' +
-        '<p> ' + formattedDate+ '</p>' +
-        '<p id ="lastpara"> <i class="fa-solid fa-location-dot"></i> ' + data.name+ '</p>' 
-        } else if ( data.main.temp > 20 && data.main.temp <= 30 ){
-            weatherInfo.innerHTML = '<h3> Now </h3>' +
-                                '<h1>' + data.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
-                                '<p>Weather in ' + data.weather[0].description + '</p>' +
-                                '<p> ' + formattedDate+ '</p>' +
-                                '<p id ="lastpara"> <i class="fa-solid fa-location-dot"></i> ' + data.name+ '</p>'
-                            } else{
-                                weatherInfo.innerHTML = '<h3> Now ' +'</h3>' +
-                                '<h1>' + data.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
-                                '<p>Weather in ' + data.weather[0].description + '</p>' +
-                                '<p> ' + formattedDate+ '</p>' +
-                                '<p id ="lastpara"> <i class="fa-solid fa-location-dot"></i> ' + data.name+ '</p>'
-                            }
-                            
-                        })
-        .catch(function(error) {
-        let weatherInfo = document.getElementById('data-details');
-        weatherInfo.innerHTML = '<p>' + error.message + '</p>';
-    });
+        const api_key = `928754d34862d5c9491233f6ec79e1ff`;
+        let open_api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=metric`;
+        fetch(open_api)
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error("City not found");
+
+                }
+            })
+            .then(function (data) {
+                let weatherInfo = document.getElementById("weather-details");
+                let timestamp = data.dt;
+                let date = new Date(timestamp * 1000);
+                let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                let months = [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+
+                let formattedDate = `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
+
+                if (data.main.temp <= 20) {
+                    weatherInfo.innerHTML = '<h3> Now ' + '</h3>' +
+                        '<h1>' + data.main.temp + '°C <i class="fa-solid fa-snowflake"></i> </h1>' +
+                        '<p>Weather in ' + data.weather[0].description + '</p>' +
+                        '<p> ' + formattedDate + '</p>' +
+                        '<p id ="lastpara"> <i class="fa-solid fa-location-dot"></i> ' + data.name + '</p>'
+                } else if (data.main.temp > 20 && data.main.temp <= 30) {
+                    weatherInfo.innerHTML = '<h3> Now </h3>' +
+                        '<h1>' + data.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
+                        '<p>Weather in ' + data.weather[0].description + '</p>' +
+                        '<p> ' + formattedDate + '</p>' +
+                        '<p id ="lastpara"> <i class="fa-solid fa-location-dot"></i> ' + data.name + '</p>'
+                } else {
+                    weatherInfo.innerHTML = '<h3> Now ' + '</h3>' +
+                        '<h1>' + data.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
+                        '<p>Weather in ' + data.weather[0].description + '</p>' +
+                        '<p> ' + formattedDate + '</p>' +
+                        '<p id ="lastpara"> <i class="fa-solid fa-location-dot"></i> ' + data.name + '</p>'
+                }
+                  let today_time = document.getElementById("time");
+                  let time_rise =  data.sys.sunrise;
+                  let time_set =  data.sys.sunset;
+                  let date_new = new Date (time_rise *1000);
+                  let date_new2 = new Date (time_set *1000);
+
+                today_time.innerHTML = `<h4>SunRise & Sunset</h4>
+                <p> <img src="./image.png" alt=""> Sun rise ${date_new.toLocaleTimeString()}</p>
+                <p> Sun Set ${date_new2.toLocaleTimeString()}</p>`
+
+
+
+
+
+
+
+
+
+                let lat = data.coord.lat;
+                let lon = data.coord.lon;
+                getAirQuality(lat,lon);
+                // console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+
+
+            })
+            .catch(function (error) {
+                let weatherInfo = document.getElementById("weather-details");
+                weatherInfo.innerHTML = '<p>' + error.message + '</p>';
+            });
     }
 
 
     //  air pollltiion api
-    function getAirqulity(){
-     let city2 = document.getElementById("city").value;
-        const api_key2 = `928754d34862d5c9491233f6ec79e1ff` ;
-        let air_api = `http://api.openweathermap.org/data/2.5/air_pollution?q=${city2}&appid=${api_key2}&units=metric`
+    function getAirQuality(lat, lon) {
+        const api_key2 = `928754d34862d5c9491233f6ec79e1ff`;
+        let air_api = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${api_key2}`;
+
         fetch(air_api)
-        .then(function (response){
-            if (response.ok){
-                return response.json()
-            } else {
-                throw new Error ("City not founded")
-            }
-        })
-        .then( function (dataofair){
-            let today = document.getElementById("air");
-            const aqiLevels = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
-            today.innerHTML = `<h3>Todays Highlights</h3>`
-            `<p> Air Quality Index  ${dataofair.list[0].aqi} </p>`
-        })
-        .catch(function(error) {
-            let todayair = document.getElementById('air');
-            todayair.innerHTML = '<p>' + error.message + '</p>';
-        });
-    
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error("City not founded")
+                }
+            })
+            .then(function (dataofair) {
+                let today = document.getElementById("air");
+                const aqiLevels = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
+                let aqi =  dataofair.list[0].main.aqi;
+                today.innerHTML = `<h3>Todays Highlights</h3>
+                <p> Air Quality Index:  ${aqiLevels[aqi -1]} </p>
+                <p> PM 2.5 ${dataofair.list[0].components.pm2_5} </p> 
+                <p> S0<sub>2</sub> ${dataofair.list[0].components.so2} </p> 
+                <p> NO<sub>2</sub> ${dataofair.list[0].components.no2} </p> 
+                <p> O<sub>3</sub> ${dataofair.list[0].components.o3} </p>  `
+              
+
+
+            })
+            .catch(function (error) {
+                let today = document.getElementById('todays-higl');
+                today.innerHTML = '<p>' + error.message + '</p>';
+            });
+
     }
+
+
+
     getWeather();
-    getAirqulity();
 }
 
