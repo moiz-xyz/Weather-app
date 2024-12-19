@@ -99,7 +99,10 @@ body.light-mode #light-icon {
     background-color: #666666; /* Even lighter gray when clicked */
     transform: scale(0.98); /* Slightly reduce size when clicked */
 }
+.main{
 
+    display: none;
+}
 .data-details{
     width: 100%;
     display: flex;
@@ -115,8 +118,7 @@ body.light-mode #light-icon {
 }
 #weather-details>h3{
     padding-top: 10%;
-    
-}
+    }
 #lastpara{
     padding-bottom: 10%;
 }
@@ -124,28 +126,73 @@ body.light-mode #light-icon {
     background-color: rgba(128, 128, 128, 0.226);
 margin-left: 3%;
 width: 80%;
+margin-top: 20px;
+border-radius: 30px;
+padding-bottom: 20px;
 }
 .flex{
     display: flex;
-    width: 100%;
-    border: 2px solid green;
-}
-.flex2{
-    display: flex;
-
+    width: 98%;
+    margin-top: 20px;
+    margin-left: 2%;
 }
 #air{
-    /* border: 20px solid red; */
     background-color: rgba(0, 0, 0, 0.141);
-    display: flex;
-    flex-direction: column;
+    border-radius: 30px;
     width: 60%;
     text-align: center;
-
+    
 }
 #air>h4{
+    font-size: larger;
+    font-size: medium;
 }
-/* #air>p{
-    display: flex;
-    flex-direction: column;
-} */
+#air>h4>b{
+    font-size: medium;
+    color:green;
+    border: 2px solid  lightgreen;
+    background-color: lightgreen;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-top: 2px ;
+    margin-left: 35%;
+
+}
+#air>p{
+ display: inline-block;
+ gap: 10px;
+     margin-left: 7%;
+     color: orangered;
+     font-weight: bold;
+     font-size: large;
+     
+    }
+    #time{
+        /* display: flex; */
+        background-color: rgba(0, 0, 0, 0.141);
+        border-radius: 30px;
+        width: 35%;
+        margin-left: 30px;
+        text-align: center;
+    }
+    .flex2{
+        display: flex;
+        width: 100%;
+        /* border: 3px solid blue; */
+        /* margin-left: 2%; */
+    }
+    .flex2>div{
+        width: 25%;
+        border-radius: 20px;
+        background-color: rgba(0, 0, 0, 0.141);
+        margin-top: 30px;
+        margin-left: 5%;
+        text-align: center;
+    }
+    .flex2>div>h4{
+        font-weight: 200;
+        /* border: 3px solid green;     */
+    }
+    .flex2>div>p{
+        font-size: x-large;
+    }

@@ -63,32 +63,26 @@ function darkenable() {
                   let date_new2 = new Date (time_set *1000);
 
                   today_time.innerHTML = `<h4>SunRise & Sunset</h4>
-                  <p> <img src="./2992431_brightness_energy_glow_light_solar_icon.png"  height="25px" width="25px"> Sun rise ${date_new.toLocaleTimeString()}</p>
+                  <p><i class="fas fa-sun"></i>  Sun rise ${date_new.toLocaleTimeString()}</p>
                 <p> <i class="fa-solid fa-moon"></i>  Sun Set ${date_new2.toLocaleTimeString()}</p>`
                 let humidity = document.getElementById("humidity");
                 humidity.innerHTML = `
                  <h4> Humidity</h4>
-                 <p><img src="https://img.icons8.com/?size=100&id=32624&format=png&color=000000 "  height="32px" width="32px"> ${data.main.humidity}%</p>`
+                 <p><i class="fa-solid fa-droplet"></i> ${data.main.humidity}%</p>`
                  let pressure = document.getElementById("pressure");
                  pressure.innerHTML = `
                  <h4> Presssure</h4>
-                 <p> <img src="./Screenshot 2024-12-18 221724.png" height="32px" width="32px" alt=""> ${data.main.pressure}hPa</p> `
+                 <p> <i class="fa-solid fa-gauge"></i> ${data.main.pressure}hPa</p> `
 
                  let visibility = document.getElementById("visi");
                  visibility.innerHTML = `
                  <h4> Visibility</h4>
-                 <p> <i class="fa-regular fa-eye"></i> ${data.visibility}m</p> `
+                 <p> <i class="fa-regular fa-eye"></i> ${data.visibility/1000}km</p> `
 
                  let feels = document.getElementById("feels");
                  feels.innerHTML = `
                  <h4> Feels like </h4>
                  <p> <i class="fa-solid fa-temperature-three-quarters"></i> ${data.main.feels_like}°C</p> `
-
-                
-
-
-
-
                 let lat = data.coord.lat;
                 let lon = data.coord.lon;
                 getAirQuality(lat,lon);
@@ -121,14 +115,12 @@ function darkenable() {
                 const aqiLevels = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
                 let aqi =  dataofair.list[0].main.aqi;
                 today.innerHTML = `
-                <h4> Air Quality Index:  ${aqiLevels[aqi -1]} </h4>  
+                <h4> Air Quality Index:<b>  ${aqiLevels[aqi -1]}</b> </h4>  
                 <p> PM 2.5 ${dataofair.list[0].components.pm2_5} </p> 
                 <p> S0<sub>2</sub> ${dataofair.list[0].components.so2} </p> 
                 <p> NO<sub>2</sub> ${dataofair.list[0].components.no2} </p> 
                 <p> O<sub>3</sub> ${dataofair.list[0].components.o3} </p>  `
                 
-
-
             })
             .catch(function (error) {
                 let today = document.getElementById('todays-higl');
@@ -137,8 +129,7 @@ function darkenable() {
 
     }
 
-
-
-    getWeather();
+    document.querySelector('.main').style.display = 'block';
+      getWeather();
 }
 
