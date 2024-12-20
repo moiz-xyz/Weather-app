@@ -86,6 +86,7 @@ function darkenable() {
                 let lat = data.coord.lat;
                 let lon = data.coord.lon;
                 getAirQuality(lat,lon);
+                dailyfetch(lat,lon)
                 // console.log(`Latitude: ${lat}, Longitude: ${lon}`);
 
 
@@ -129,7 +130,69 @@ function darkenable() {
 
     }
 
+    
+    
+    //  Daily forcast api 
+    function dailyfetch (lat,lon){
+        const api_key3 = `928754d34862d5c9491233f6ec79e1ff`;
+      let daily_api = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api_key3}`;
+     
+      fetch(daily_api)
+        .then(function(response){
+if (response.ok){
+    return response.json()
+} else {
+    throw new Error("City not founded")
+}
+})
+.then(function (dataofdaily){
+
+let max_temp = {};
+for ( let i = 0 ; i < dataofdaily.list.length ; i++){
+let forcast = dataofdaily.list[i];
+let date= forcast.dt_txt.split(" ")[0];
+if (!max_temp[date]){
+     max_temp[date] = forcast.main.temp_max;
+} else {
+    max_temp[date] = Math.max(max_temp[date], forcast.main.temp_max);
+}
+console.log(date,max_temp[date]);   
+
+// console.log(new Date (dataofdaily.dt_txt));
+
+}
+
+
+    // console.log(dataofdaily);
+    
+    
+    // let days_forcast = document.getElementById("days-forcast");
+    
+    //  if (data.main.temp <= 20) {
+    //                 days_forcast.innerHTML = '<h3> 5 days' + '</h3>' +
+    //                     '<h1>' + dataofdaily.main.temp_max + '°C <i class="fa-solid fa-snowflake"></i> </h1>' +
+    //                     '<p> ' + formattedDate + '</p>' 
+    //             } else if (data.main.temp > 20 && data.main.temp <= 30) {
+    //                 days_forcast.innerHTML = '<h3> 5 days </h3>' +
+    //                     '<h1>' + dataofdaily.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
+    //                     '<p> ' + formattedDate + '</p>' 
+    //             } else {
+    //                 days_forcast.innerHTML = '<h3> 5 days' + '</h3>' +
+    //                     '<h1>' + dataofdaily.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
+    //                     '<p> ' + formattedDate + '</p>' 
+    //             }
+    
+})
+.catch(function (error) {
+    let today = document.getElementById('days-forcast');
+    today.innerHTML = '<p>' + error.message + '</p>';
+});
+
+
+    }
+    
     document.querySelector('.main').style.display = 'block';
       getWeather();
+
 }
 

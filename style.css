@@ -129,6 +129,7 @@ width: 80%;
 margin-top: 20px;
 border-radius: 30px;
 padding-bottom: 20px;
+/* color: ; */
 }
 .flex{
     display: flex;
@@ -162,7 +163,8 @@ padding-bottom: 20px;
  display: inline-block;
  gap: 10px;
      margin-left: 7%;
-     color: orangered;
+     /* color: orangered; */
+     color: #FFEB3B;
      font-weight: bold;
      font-size: large;
      
@@ -174,6 +176,9 @@ padding-bottom: 20px;
         width: 35%;
         margin-left: 30px;
         text-align: center;
+        color:  #AB47BC;
+        font-weight: 600;
+        font-size: larger;
     }
     .flex2{
         display: flex;
@@ -188,11 +193,16 @@ padding-bottom: 20px;
         margin-top: 30px;
         margin-left: 5%;
         text-align: center;
+        
     }
     .flex2>div>h4{
         font-weight: 200;
+        /* color:  #26A69A; */
         /* border: 3px solid green;     */
+        font-weight: bolder;
     }
     .flex2>div>p{
-        font-size: x-large;
-    }
+        font-size: large;
+        color:orangered;
+        font-weight: bolder;
+}
