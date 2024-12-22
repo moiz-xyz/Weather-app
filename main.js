@@ -133,63 +133,63 @@ function darkenable() {
     
     
     //  Daily forcast api 
-    function dailyfetch (lat,lon){
-        const api_key3 = `928754d34862d5c9491233f6ec79e1ff`;
-      let daily_api = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api_key3}`;
+//     function dailyfetch (lat,lon){
+//         const api_key3 = `928754d34862d5c9491233f6ec79e1ff`;
+//       let daily_api = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api_key3}`;
      
-      fetch(daily_api)
-        .then(function(response){
-if (response.ok){
-    return response.json()
-} else {
-    throw new Error("City not founded")
-}
-})
-.then(function (dataofdaily){
-    let days_forcast = document.getElementById("days-forcast");
+//       fetch(daily_api)
+//         .then(function(response){
+// if (response.ok){
+//     return response.json()
+// } else {
+//     throw new Error("City not founded")
+// }
+// })
+// .then(function (dataofdaily){
+//     let days_forcast = document.getElementById("days-forcast");
 
-let max_temp = {};
-for ( let i = 0 ; i < dataofdaily.list.length ; i++){
-let forcast = dataofdaily.list[i];
-let date= forcast.dt_txt.split(" ")[0];
-let tempInCels = (forcast.main.temp_max - 273.15).toFixed(2);
+// let max_temp = {};
+// for ( let i = 0 ; i < dataofdaily.list.length ; i++){
+// let forcast = dataofdaily.list[i];
+// let date= forcast.dt_txt.split(" ")[0];
+// let tempInCels = (forcast.main.temp_max - 273.15).toFixed(2);
 
-if (!max_temp[date]){
-    max_temp[date] = tempInCels;
-    //  console.log(tempincels);   
-    let weatherIcon = '';
-    let weatherText = `<p>${tempInCels}°C</p>`;
+// if (!max_temp[date]){
+//     max_temp[date] = tempInCels;
+//     //  console.log(tempincels);   
+//     let weatherIcon = '';
+//     let weatherText = `<p>${tempInCels}°C</p>`;
 
-    if (tempInCels >= 20) {
-        weatherIcon = '<i class="fa-solid fa-snowflake"></i>';
-    } else if (tempInCels <= 30) {
-        weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
-    } else {
-        weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
-    }
+//     if (tempInCels >= 20) {
+//         weatherIcon = '<i class="fa-solid fa-snowflake"></i>';
+//     } else if (tempInCels <= 30) {
+//         weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
+//     } else {
+//         weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
+//     }
 
-    // Accumulate the forecast HTML
-    forecastHtml += `<h3>${date}</h3>` + weatherText + weatherIcon;
+//     // Accumulate the forecast HTML
+//     forecastHtml += `<h3>${date}</h3>` + weatherText + weatherIcon;
 
-                } else {
-    max_temp[date] = Math.max(max_temp[date], forcast.main.temp_max);
-}
-days_forcast.innerHTML = forecastHtml;
-}
+//                 } else {
+//     max_temp[date] = Math.max(max_temp[date], forcast.main.temp_max);
+// }
+// days_forcast.innerHTML = forecastHtml;
+// }
 
 
     
     
 
     
-})
-.catch(function (error) {
-    let today = document.getElementById('days-forcast');
-    today.innerHTML = '<p>' + error.message + '</p>';
-});
+// })
+// .catch(function (error) {
+//     let today = document.getElementById('days-forcast');
+//     today.innerHTML = '<p>' + error.message + '</p>';
+// });
 
 
-    }
+//     }
     
     document.querySelector('.main').style.display = 'block';
       getWeather();
