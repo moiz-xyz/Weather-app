@@ -86,7 +86,7 @@ function darkenable() {
                 let lat = data.coord.lat;
                 let lon = data.coord.lon;
                 getAirQuality(lat,lon);
-                dailyfetch(lat,lon)
+                // dailyfetch(lat,lon)
                 // console.log(`Latitude: ${lat}, Longitude: ${lon}`);
 
 
