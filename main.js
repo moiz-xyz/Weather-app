@@ -146,44 +146,47 @@ if (response.ok){
 }
 })
 .then(function (dataofdaily){
+    let days_forcast = document.getElementById("days-forcast");
 
 let max_temp = {};
 for ( let i = 0 ; i < dataofdaily.list.length ; i++){
 let forcast = dataofdaily.list[i];
 let date= forcast.dt_txt.split(" ")[0];
+let tempInCels = (forcast.main.temp_max - 273.15).toFixed(2);
+
 if (!max_temp[date]){
-     max_temp[date] = forcast.main.temp_max;
-     console.log(date,max_temp[date]);   
-     
-} else {
+    max_temp[date] = tempInCels;
+    //  console.log(tempincels);   
+    let weatherIcon = '';
+    let weatherText = `<p>${tempInCels}°C</p>`;
+
+    if (tempInCels >= 20) {
+        weatherIcon = '<i class="fa-solid fa-snowflake"></i>';
+    } else if (tempInCels <= 30) {
+        weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
+    } else {
+        weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
+    }
+
+    // Accumulate the forecast HTML
+    forecastHtml += `<h3>${date}</h3>` + weatherText + weatherIcon;
+
+                } else {
     max_temp[date] = Math.max(max_temp[date], forcast.main.temp_max);
 }
-
+days_forcast.innerHTML = forecastHtml;
 }
 
+
     
     
-    // let days_forcast = document.getElementById("days-forcast");
-    
-    //  if (data.main.temp <= 20) {
-    //                 days_forcast.innerHTML = '<h3> 5 days' + '</h3>' +
-    //                     '<h1>' + dataofdaily.main.temp_max + '°C <i class="fa-solid fa-snowflake"></i> </h1>' +
-    //                     '<p> ' + formattedDate + '</p>' 
-    //             } else if (data.main.temp > 20 && data.main.temp <= 30) {
-    //                 days_forcast.innerHTML = '<h3> 5 days </h3>' +
-    //                     '<h1>' + dataofdaily.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
-    //                     '<p> ' + formattedDate + '</p>' 
-    //             } else {
-    //                 days_forcast.innerHTML = '<h3> 5 days' + '</h3>' +
-    //                     '<h1>' + dataofdaily.main.temp + '°C <i class="fa-solid fa-cloud-sun"></i> </h1>' +
-    //                     '<p> ' + formattedDate + '</p>' 
-    //             }
+
     
 })
-// .catch(function (error) {
-//     let today = document.getElementById('days-forcast');
-//     today.innerHTML = '<p>' + error.message + '</p>';
-// });
+.catch(function (error) {
+    let today = document.getElementById('days-forcast');
+    today.innerHTML = '<p>' + error.message + '</p>';
+});
 
 
     }
