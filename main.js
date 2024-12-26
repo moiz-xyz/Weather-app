@@ -86,7 +86,8 @@ function darkenable() {
                 let lat = data.coord.lat;
                 let lon = data.coord.lon;
                 getAirQuality(lat,lon);
-                // dailyfetch(lat,lon)
+                dailyfetch(lat,lon);
+                hourly(lat,lon);
                 // console.log(`Latitude: ${lat}, Longitude: ${lon}`);
 
 
@@ -132,66 +133,98 @@ function darkenable() {
 
     
     
-    //  Daily forcast api 
-//     function dailyfetch (lat,lon){
-//         const api_key3 = `928754d34862d5c9491233f6ec79e1ff`;
-//       let daily_api = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api_key3}`;
+    //  Days  forcast api 
+    function dailyfetch (lat,lon){
+        const api_key3 = `928754d34862d5c9491233f6ec79e1ff`;
+      let daily_api = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api_key3}`;
      
-//       fetch(daily_api)
-//         .then(function(response){
-// if (response.ok){
-//     return response.json()
-// } else {
-//     throw new Error("City not founded")
-// }
-// })
-// .then(function (dataofdaily){
-//     let days_forcast = document.getElementById("days-forcast");
+      fetch(daily_api)
+        .then(function(response){
+if (response.ok){
+    return response.json()
+} else {
+    throw new Error("City not founded")
+}
+})
+.then(function (dataofdaily) {
+    let days_forcast = document.getElementById("days-forcast");
+    let max_temp = {};
+        const weatherIcons = {
+            "Clear": "fas fa-sun", // Clear weather
+            "Clouds": "fas fa-cloud", // Cloudy
+            "Rain": "fas fa-cloud-showers-heavy", // Rainy
+            "Snow": "fas fa-snowflake", // Snowy
+            "Thunderstorm": "fas fa-bolt", // Thunderstorm
+            "Drizzle": "fas fa-cloud-rain", // Light rain
+            "Mist": "fas fa-smog" // Mist
+        };
 
-// let max_temp = {};
-// for ( let i = 0 ; i < dataofdaily.list.length ; i++){
-// let forcast = dataofdaily.list[i];
-// let date= forcast.dt_txt.split(" ")[0];
-// let tempInCels = (forcast.main.temp_max - 273.15).toFixed(2);
+    for (let i = 0; i < dataofdaily.list.length; i++) {
+        let forcast = dataofdaily.list[i];
+        let date = forcast.dt_txt.split(" ")[0];
+        let tempInCels = (forcast.main.temp_max - 273.15).toFixed(2); // Convert Kelvin to Celsius
+        let weatherCondition = forcast.weather[0].main;
 
-// if (!max_temp[date]){
-//     max_temp[date] = tempInCels;
-//     //  console.log(tempincels);   
-//     let weatherIcon = '';
-//     let weatherText = `<p>${tempInCels}°C</p>`;
+        // If the date is not already in the max_temp object
+        if (!max_temp[date]) {
+            max_temp[date] = { temp: tempInCels, icon: weatherIcons[weatherCondition] };
+        } else {
+            // Compare and update the max temperature for that day
+            max_temp[date].temp = Math.max(max_temp[date].temp, tempInCels); // Update temperature
+        }
+    }
 
-//     if (tempInCels >= 20) {
-//         weatherIcon = '<i class="fa-solid fa-snowflake"></i>';
-//     } else if (tempInCels <= 30) {
-//         weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
-//     } else {
-//         weatherIcon = '<i class="fa-solid fa-cloud-sun"></i>';
-//     }
+    // Build the HTML for the forecast
+    let forecastHTML = '<h3>6 Days Forecast</h3>';
+    for (let date in max_temp) {
+        let iconClass = max_temp[date].icon || "fas fa-question-circle"; // Default icon if no match
+        forecastHTML += `
+            <li>
+                ${date}: <b> ${max_temp[date].temp}°C </b> 
+                <i class="${iconClass}"></i>
+            </li>
+        `;
+    }
 
-//     // Accumulate the forecast HTML
-//     forecastHtml += `<h3>${date}</h3>` + weatherText + weatherIcon;
+    days_forcast.innerHTML = forecastHTML;
 
-//                 } else {
-//     max_temp[date] = Math.max(max_temp[date], forcast.main.temp_max);
-// }
-// days_forcast.innerHTML = forecastHtml;
-// }
+})
+.catch(function (error) {
+    let today = document.getElementById('days-forcast');
+    today.innerHTML = '<p>' + error.message + '</p>';
+})
 
-
-    
-    
-
-    
-// })
-// .catch(function (error) {
-//     let today = document.getElementById('days-forcast');
-//     today.innerHTML = '<p>' + error.message + '</p>';
-// });
+}
 
 
-//     }
-    
-    document.querySelector('.main').style.display = 'block';
+//  Hourly fetch 
+function hourly (lat,lon){
+    let time = dt_txt
+    const api_key4 = `928754d34862d5c9491233f6ec79e1ff`;
+    const apihouly = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${time}&appid=${api_key4}`
+fetch(apihouly)
+    .then ( function (response){
+       if(response.ok){
+            return response.json()
+        } else{
+            throw new Error ("City not founded ")
+        }
+    })
+    .then (function (dataOfhoulry){
+        console.log(dataOfhoulry);
+        
+    })
+    .catch(function (error){
+        let hourly = document.getElementById('time_fetch');
+        hourly.innerHTML = '<p>' + error.message + '</p>';
+    })
+}
+
+
+
+
+
+   document.querySelector('.main').style.display = 'block';
       getWeather();
 
 }

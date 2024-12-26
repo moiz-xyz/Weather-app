@@ -3,13 +3,15 @@ body {
     color: black;
     font-family: "Montserrat", sans-serif;
 }
-
+.cont{
+    border:  1px solid red;
+}
 .nav> i {
     font-size: 24px;
     cursor: pointer;
     margin-right: 10px;
     text-align: center;
-    margin-left: 90%;
+    /* margin-left: 90%; */
 }
 
 body.dark-mode {
@@ -35,7 +37,7 @@ body.light-mode #light-icon {
 .nav_app{
     display: flex;
     width: 100%;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     
 }
 .icon{
@@ -44,8 +46,8 @@ body.light-mode #light-icon {
 }
 .icon>i{
     font-size: xx-large;
-    margin-top: 20px;
     margin-left: 10px;
+    margin-top: 20px;
     
 }
 .icon>h3{
@@ -163,10 +165,9 @@ padding-bottom: 20px;
  display: inline-block;
  gap: 10px;
      margin-left: 7%;
-     /* color: orangered; */
-     color: #FFEB3B;
-     font-weight: bold;
+         font-weight: bold;
      font-size: large;
+
      
     }
     #time{
@@ -176,7 +177,6 @@ padding-bottom: 20px;
         width: 35%;
         margin-left: 30px;
         text-align: center;
-        color:  #AB47BC;
         font-weight: 600;
         font-size: larger;
     }
@@ -203,8 +203,34 @@ padding-bottom: 20px;
     }
     .flex2>div>p{
         font-size: large;
-        color:orangered;
         font-weight: bolder;
+}
+/* #days-forcast{
+    border: 1px solid red;
+    display: flex;
+} */
+ li{
+    list-style-type: none;
+ }
+ #days-forcast{
+    background-color: rgba(128, 128, 128, 0.226);
+    margin-top: 20px;
+    width: 15%;
+    height: 45vh;
+    margin-left: 2%;
+    padding-left: 2%;
+    border-radius: 30px;
+    margin-bottom: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+ }
+ #days-forcast>li{
+margin-top: 20px;
+font-weight: 250;
+
+}
+#days-forcast>li>b{
+    margin-left: 5px;
 }
 @media only screen and (max-width: 480px) {
 
